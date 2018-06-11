@@ -23,14 +23,15 @@
     
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
-        const socket = io('http://localhost:3000?token=abc');
+        const roomId = 2;
+        const socket = io(`https://like-socket.herokuapp.com/?token=abc&roomId=${roomId}`);
         $('form').submit(() => {
-            socket.emit('chat message2', $('#m').val());
+            socket.emit(`chat message${roomId}`, $('#m').val());
             $('#m').val('');
             return false;
         });
 
-        socket.on('chat message2', (msg) => {
+        socket.on(`chat message${roomId}`, (msg) => {
             $('#messages').append($('<li>').text(msg));
         });
     </script>
